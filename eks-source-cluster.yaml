@@ -1,0 +1,32 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: px-source
+  region: us-west-2
+  version: "1.21"
+managedNodeGroups:
+  - name: storage-nodes
+    instanceType: m5.xlarge
+    minSize: 4
+    maxSize: 4
+    volumeSize: 50
+    amiFamily: AmazonLinux2
+    labels: {role: worker, "portworx.io/node-type": "storage"}
+    tags:
+      nodegroup-role: worker
+    iam:
+      attachPolicyARNs:
+        - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
+        - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+        - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+        - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
+        - <<arn-pxec2node-iam-policy>>
+      withAddonPolicies:
+        imageBuilder: true
+        autoScaler: true
+        ebs: true
+        fsx: true
+        efs: true
+        albIngress: true
+        cloudWatch: true
+availabilityZones: [ 'us-west-2a', 'us-west-2b', 'us-west-2c', 'us-west-2d' ]

@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kafka-demo
+  labels:
+    pds.portworx.com/available: 'true'
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: postgres-demo
+  labels:
+    pds.portworx.com/available: 'true'
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cassandra-demo
+  labels:
+    pds.portworx.com/available: 'true'
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: zookeeper-demo
+  labels:
+    pds.portworx.com/available: 'true'
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: rabbitmq-demo
+  labels:
+    pds.portworx.com/available: 'true'
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mysql-demo
+  labels:
+    pds.portworx.com/available: 'true'
