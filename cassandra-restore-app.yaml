@@ -77,9 +77,16 @@ spec:
           initialDelaySeconds: 15
           timeoutSeconds: 5
         volumeMounts:
-        - name: cassandra-data-clone
+        - name: cassandra-snap-data
           mountPath: /cassandra_data
-      volumes:
-        - name: cassandra-data-clone
-          persistentVolumeClaim:
-            claimName: cassandra-data-clone
+  volumeClaimTemplates:
+  - metadata:
+      name: cassandra-snap-data
+      annotations:
+        volume.beta.kubernetes.io/storage-class: group-sc
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 2Gi
+
