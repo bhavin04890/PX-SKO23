@@ -21,7 +21,7 @@ kubectl delete -f recoverpv.yaml
 sleep 10
 
 VolId=$(kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl v l | grep "pvc-restoredvol" | awk '{print $1}' )
-kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl v d $VolId
+kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl v d $VolId --force
 
 rm recoverpv.yaml
 

@@ -16,7 +16,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   annotations: 
-    pv.kubernetes.io/provisioned-by: kubernetes.io/portworx-volume
+    pv.kubernetes.io/provisioned-by: pxd.portworx.com
   finalizers: 
   - kubernetes.io/pv-protection
   name: pvc-restoredvol
@@ -38,16 +38,16 @@ EOF
 
 echo "Creating a new PV from the restored portworx volume"
 
-kubectl apply -f recoverpvtest.yaml
+kubectl apply -f recoverpv.yaml
 
-echo "Redeploying the Postgres Pod and PVC"
-kubectl apply -f postgres-db-tc.yaml -n trashcan
-sleep 10
-kubectl delete deploy k8s-counter-deployment -n trashcan
-sleep 30
-kubectl apply -f k8s-webapp-tc.yaml -n trashcan 
-sleep 30
+#echo "Redeploying the Postgres Pod and PVC"
+#kubectl apply -f postgres-db-tc.yaml -n trashcan
+#sleep 10
+#kubectl delete deploy k8s-counter-deployment -n trashcan
+#sleep 30
+#kubectl apply -f k8s-webapp-tc.yaml -n trashcan 
+#sleep 30
 
-echo "Application Endpoint:"
-kubectl get svc -n trashcan
+#echo "Application Endpoint:"
+#kubectl get svc -n trashcan
 
